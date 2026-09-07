@@ -13,5 +13,5 @@
     "sourceMap": true,
     "composite": false
   },
-  "exclude": ["node_modules", "dist", ".next"]
+  "exclude": ["node_modules", "dist", ".next", "apps", "packages"]
 }

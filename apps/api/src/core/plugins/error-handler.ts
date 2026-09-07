@@ -1,9 +1,9 @@
-import { FastifyInstance, FastifyPluginAsync } from 'fastify';
+import { FastifyInstance, FastifyPluginAsync, FastifyError } from 'fastify';
 import fp from 'fastify-plugin';
 import { AppError } from '../errors/app-error';
 
 const errorHandlerPlugin: FastifyPluginAsync = async (fastify: FastifyInstance) => {
-  fastify.setErrorHandler((error, request, reply) => {
+  fastify.setErrorHandler((error: FastifyError, request, reply) => {
     const requestId = request.id;
 
     // Erros de Domínio Conhecidos
