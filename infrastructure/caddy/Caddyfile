@@ -1,0 +1,40 @@
+# Caddy configuration for Travel Diary
+# In local development: http://localhost
+# In production: replace with your domain, e.g. diary.yourdomain.com
+
+{
+    # Global options
+    auto_https off # In production with domain, remove this to enable automated Let's Encrypt TLS
+    admin off
+}
+
+:80 {
+    # Security headers
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    # API routes
+    handle /api/* {
+        reverse_proxy api:3001
+    }
+
+    # Health and metrics
+    handle /health* {
+        reverse_proxy api:3001
+    }
+
+    # Storage media serving (if public direct read)
+    handle /storage/* {
+        uri strip_prefix /storage
+        reverse_proxy minio:9000
+    }
+
+    # Web Frontend (Next.js)
+    handle {
+        reverse_proxy web:3000
+    }
+}

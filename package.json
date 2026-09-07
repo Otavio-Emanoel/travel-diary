@@ -1,0 +1,19 @@
+{
+  "name": "travel-diary-root",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sistema completo de Diário de Viagens (Modular Monolith)",
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "pnpm --recursive run build",
+    "test": "pnpm --recursive run test",
+    "lint": "pnpm --recursive run lint",
+    "format": "pnpm --recursive run format",
+    "dev:api": "pnpm --filter @travel-diary/api dev",
+    "dev:web": "pnpm --filter @travel-diary/web dev",
+    "dev:mobile": "pnpm --filter @travel-diary/mobile start"
+  }
+}
